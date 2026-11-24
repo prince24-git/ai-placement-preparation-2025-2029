@@ -63,16 +63,16 @@ def main() -> None:
 
         # Mean absolute difference across the selected, consistently ordered bands.
         score = np.abs(before_data.data - after_data.data).mean(axis=0)
-        mask = np.full((before.height, before.width), 255, dtype=np.uint8)
-        mask[valid] = (score[valid] >= args.threshold).astype(np.uint8)
+        mask = np.full((before.height, before.width), 127, dtype=np.uint8)
+        mask[valid] = np.where(score[valid] >= args.threshold, 255, 0).astype(np.uint8)
 
         profile = after.profile.copy()
-        profile.update(count=1, dtype="uint8", nodata=255, compress="lzw")
+        profile.update(count=1, dtype="uint8", nodata=127, compress="lzw")
         with rasterio.open(args.output, "w", **profile) as destination:
             destination.write(mask, 1)
 
     valid_count = int(valid.sum())
-    changed_count = int(((mask == 1) & valid).sum())
+    changed_count = int(((mask == 255) & valid).sum())
     changed_percent = (100.0 * changed_count / valid_count) if valid_count else 0.0
     print(f"Saved change mask: {args.output}")
     print(f"Changed valid pixels: {changed_count}/{valid_count} ({changed_percent:.2f}%)")
@@ -81,3 +81,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

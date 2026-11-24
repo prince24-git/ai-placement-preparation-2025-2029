@@ -47,6 +47,8 @@ python src/change_detection.py --before data/before.tif --after data/after.tif -
 
 The threshold is a starting value for experimentation, not a universal setting. Inspect outputs and tune it against labeled validation areas.
 
+Mask pixel values: `0` = no change, `255` = change, and `127` = invalid/nodata. These values make the change regions visible in ordinary grayscale viewers.
+
 ## Next milestones
 
 1. Choose the XYZ area and comparison dates.
@@ -62,3 +64,5 @@ The threshold is a starting value for experimentation, not a universal setting. 
 - [Dynamic World data catalog](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1)
 - [LEVIR-CD paper](https://levir.buaa.edu.cn/publications/remotesensing-798405-eng.pdf)
 - [CMU SEI xView2 and xBD overview](https://www.sei.cmu.edu/projects/xview-2-challenge/)
+
+

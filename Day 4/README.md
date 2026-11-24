@@ -21,3 +21,5 @@ Result: `Substring found`
 - `substring_search.c` - C
 - `substring_search.cpp` - C++
 - `SubstringSearch.java` - Java
+- `substring_search.py` - Python
+
